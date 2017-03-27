@@ -1,0 +1,48 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: #eee;
+}
+#frame{
+	background: #fff;
+	border-radius: 20px;
+	height: 500px;
+	width: 60%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.yuan{
+	border: 1px solid;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	margin: 20px;
+}
+#frameInner table{
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 180px;
+	text-align: center;
+}
+#text{
+	top: 50px;
+	left: 20px;
+	right: 20px;
+}
+.line{
+	background: black;
+	width: 10px;
+	height: 100px;
+	
+	top:0;
+	left: 0;
+}
+#type{
+	right: 10px;
+	top: 10px;
+}
