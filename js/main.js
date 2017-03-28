@@ -23,7 +23,7 @@ function funinit(){
 	var gstOder = new Array;
 	var corectOder = new Array;
 	var flagCO = 0;
-	var gstIdx = 0;
+//	var gstIdx = 0;
 	
 	$("#typeSet").click(function(){
 		$("#text").text("手势设置中...");
@@ -32,28 +32,28 @@ function funinit(){
 	$("#typeJudge").click(function(){
 		$("#text").text("手势验证中...");
 	});
-	$(".yuan").mousedown(function(){
+	$(".yuan").on("mousedown",function(){
 		if(flagCO == 0){
 			$("#text").text("您还没有手势，请设置手势。");
 		}else{
-			if($("#typeSet:checked") == "on"){flagCO = 1;}//重新设置手势
+			if($("#typeSet:checked").val() == "on"){flagCO = 1;}//重新设置手势
 			//正常流程：
 			this.style.backgroundColor = "black";
 			gstOder = new Array;
-			gstIdx = 0;
-			gstOder[gstIdx] = $(".yuan").index(this);
-			++gstIdx;
+			gstOder.push($(".yuan").index(this));
 			flagStart = true;
 		}
-//		console.log(gstOder)
 	});
-	$(".yuan").mouseup(function(){
+	$(".yuan").on("mouseup",function(){
 		if(flagStart){
 			if(flagCO == 1){
-				corectOder = gstOder;
-//				console.log(corectOder);
-				$("#text").text("手势设置完成。");
-				flagCO = 2;
+				if(gstOder.length < 4){
+					$("#text").text("请设置长度大于等于4的手势。");
+				}else{
+					corectOder = gstOder;
+					$("#text").text("手势设置完成。");
+					flagCO = 2;
+				}
 			}else{
 				funJudge(gstOder,corectOder);
 			}
@@ -62,11 +62,11 @@ function funinit(){
 		}
 	});
 	//正常划过流程：
-	$(".yuan").mouseover(function(){
+	$(".yuan").on("mouseover",function(){
+		
 		if(flagStart){
 			this.style.backgroundColor = "black";
-			gstOder[gstIdx] = $(".yuan").index(this);
-			++gstIdx;
+			gstOder.push($(".yuan").index(this));
 		}
 	});
 }
