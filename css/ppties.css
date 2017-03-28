@@ -4,3 +4,12 @@
 .p-a{
 	position: absolute;
 }
+.f-l{
+	float: left;
+}
+.f-r{
+	float: right;
+}
+.clear{
+	clear: both;
+}

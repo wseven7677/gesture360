@@ -3,7 +3,7 @@
 	padding: 0;
 }
 body{
-	background: #eee;
+	background: black;
 }
 /*外框*/
 #frame{
@@ -34,9 +34,11 @@ body{
 }
 /*提示文字区*/
 #text{
-	top: 50px;
-	left: 20px;
-	right: 20px;
+	top: 150px;
+	width: 90%;
+	left: 5%;
+	right: 5%;
+	text-align: center;
 }
 .line{
 	background: black;
@@ -48,51 +50,30 @@ body{
 }
 /*单选按钮区*/
 #type{
-	right: 10px;
-	top: 10px;
+	top: 80px;
+	width: 90%;
+	left: 5%;
+	right: 5%;
+	text-align: center;
 }
 
-/*移动设备样式*/
-@media only screen and (max-device-width: 500px)  {
-	body{
-		font-size: 48px;
-	}
-	input{
-		height: 48px;
-		width: 48px;
-	}
-	#frame{
-		border-radius: 50px;
-		height: 1200px;
-		width: 90%;
-		margin-top: 80px;
-	}
-	.yuan{
-		border: 2px solid;
-		width: 100px;
-		height: 100px;
-		margin: 30px;
-	}
-	#frameInner table{
-		padding-top: 500px;
-	}
-	#text{
-		top: 220px;
-		left: 80px;
-		right: 80px;
-	}
-	.line{
-		background: black;
-		width: 10px;
-		height: 100px;
-		
-		top:0;
-		left: 0;
-	}
-	#type{
-		left: 10px;
-		right: 10px;
-		top: 30px;
-		text-align: center;
-	}
+#frameInner{
+	width: 90%;
+	left: 5%;
+	right: 5%;
+}
+#head{
+	left: 0;
+	right: 0;
+	padding:5px;
+	border-bottom: 1px solid gray;
+	border-radius: 20px 20px 0 0;
+	background: #FAFAFA;
+}
+#head p{
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }

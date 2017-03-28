@@ -45,6 +45,8 @@ function funinit(){
 	var flagco = false;//是否有保存的手势
 	var setTimes = 0;
 	
+	var stlColor = "#1d13e9";//选中的颜色样式
+	
 	//事件：
 	$("#typeSet").click(function(){
 		$("#text").text("手势设置中...");
@@ -66,14 +68,14 @@ function funinit(){
 		}else{
 			gstStart = true;//开始滑动
 			gstOder = new Array;//清空上次路径
-			this.style.backgroundColor = "black";//被滑过后样式
+			this.style.backgroundColor = stlColor;//被滑过后样式
 			gstOder.push($(".yuan").index(this));//记录路径			
 		}
 
 	});
 	$(".yuan").on("mouseover",function(){
 		if(gstStart == true){
-			this.style.backgroundColor = "black";//被滑过后样式
+			this.style.backgroundColor = stlColor;//被滑过后样式
 			gstOder.push($(".yuan").index(this));//记录路径
 		}
 	});
