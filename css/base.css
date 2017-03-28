@@ -4,6 +4,8 @@
 }
 body{
 	background: black;
+	height: 100%;
+	overflow: hidden;
 }
 /*外框*/
 #frame{

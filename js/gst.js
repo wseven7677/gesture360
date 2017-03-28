@@ -1,6 +1,46 @@
 function clearStyle(){
 	$(".yuan").css("background","#fff");
 }
+function rmvAdd(gst){
+	var gstRtn = new Array;
+	var temp = gst[0];
+	gstRtn.push(temp);
+	for(var i = 1; i < gst.length;++i){
+		if(gst[i] != temp){
+			temp = gst[i];
+			gstRtn.push(temp);
+		}
+	}
+	return gstRtn;
+}
+function judgeEnterYuan(x,y){
+	//初始化返回值：
+	var rtn = new Object;
+	rtn.flag = false;
+	rtn.yuan = $(".yuan")[0];
+	//
+	for(var i = 0; i < $(".yuan").length;++i){
+		var a = $(".yuan").eq(i);
+		var fg = ( y > a.offset().top && y < a.offset().top + a.height())&& ( x > a.offset().left && x < a.offset().left + a.width() );
+		if(fg){
+			rtn.flag = true;
+			rtn.yuan = $(".yuan")[i];
+		}
+	}
+	return rtn;
+}
+function recordGst(e){
+	if(gstStart == true){
+		var posx = e.touches[0].pageX;
+		var posy = e.touches[0].pageY;
+		var rtn;
+		rtn = judgeEnterYuan(posx,posy);
+		if(rtn.flag){
+			rtn.yuan.style.backgroundColor = stlColor;//被滑过后样式
+			gstOder.push($(".yuan").index(rtn.yuan));//记录路径
+		}
+	}
+}
 
 function judgeGst(co,go){
 	var flag = 0;
@@ -38,14 +78,14 @@ function setGst(co,go,st){
 //---main----
 function funinit(){
 	var gstType = 0;
-	var gstStart = false;//路径开始
+	gstStart = false;//路径开始
 	
-	var gstOder = new Array;//每次的手势
-	var corectOder = new Array;//保存的手势
+	gstOder = new Array;//每次的手势
+	corectOder = new Array;//保存的手势
 	var flagco = false;//是否有保存的手势
 	var setTimes = 0;
 	
-	var stlColor = "#1d13e9";//选中的颜色样式
+	stlColor = "#2d2d2d";//选中的颜色样式
 	
 	//事件：
 	$("#typeSet").click(function(){
@@ -54,7 +94,7 @@ function funinit(){
 	$("#typeJudge").click(function(){
 		$("#text").text("手势验证中...");
 	});
-	$("body").on("mousemove",function(){//随时判断当前要进行的操作种类
+	$("input").on("click",function(){//随时判断当前要进行的操作种类
 		if($("#typeSet:checked").val() == "on"){
 			gstType = 1;
 		}else if($("#typeJudge:checked").val() == "on"){
@@ -62,7 +102,7 @@ function funinit(){
 		}
 	});
 	//操作事件（主事件）：
-	$(".yuan").on("mousedown",function(){
+	$(".yuan").on("touchstart",function(){
 		if((gstType == 0)||(!flagco && gstType == 2)){
 			$("#text").text("您还没有手势，请设置手势。");
 		}else{
@@ -71,18 +111,13 @@ function funinit(){
 			this.style.backgroundColor = stlColor;//被滑过后样式
 			gstOder.push($(".yuan").index(this));//记录路径			
 		}
-
 	});
-	$(".yuan").on("mouseover",function(){
-		if(gstStart == true){
-			this.style.backgroundColor = stlColor;//被滑过后样式
-			gstOder.push($(".yuan").index(this));//记录路径
-		}
-	});
-	$("body").on("mouseup",function(){
+	document.addEventListener("touchmove",recordGst,false);
+	$("body").on("touchend",function(){
 		if(gstStart == true){
 			clearStyle();//清除样式
 			gstStart = false;//滑动结束
+			gstOder = rmvAdd(gstOder);//数组去重
 			if(gstOder.length < 4){
 				$("#text").text("长度需要大于等于4");
 			}else{
@@ -107,6 +142,6 @@ function funinit(){
 				
 		}
 	});
-	
 }
+	
 funinit();
